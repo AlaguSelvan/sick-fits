@@ -1,4 +1,4 @@
-	{
+{
 	"name": "sick-fits-frontend",
 	"version": "2.0.0",
 	"description": "Sick Fits! An example React, GraphQL, Next and Apollo",
@@ -45,7 +45,9 @@
 		"@testing-library/jest-dom": "^5.11.6",
 		"@testing-library/react": "^11.2.2",
 		"@testing-library/user-event": "^12.3.0",
+		"@types/apollo-upload-client": "^14.1.0",
 		"@types/node": "^16.3.3",
+		"@types/nprogress": "^0.2.0",
 		"@types/react": "^17.0.14",
 		"@types/styled-components": "^5.1.11",
 		"babel-eslint": "^10.1.0",
@@ -72,4 +74,4 @@
 			"./jest.setup.ts"
 		]
 	}
-	}
+}

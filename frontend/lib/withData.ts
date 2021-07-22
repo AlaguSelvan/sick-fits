@@ -4,7 +4,7 @@ import { getDataFromTree } from '@apollo/client/react/ssr';
 import { createUploadLink } from 'apollo-upload-client';
 import withApollo from 'next-with-apollo';
 
-function createClient({ headers, initialState }) {
+function createClient({ headers, initialState }: any) {
 	return new ApolloClient({
 		link: ApolloLink.from([
 			onError(({ graphQLErrors, networkError }) => {
