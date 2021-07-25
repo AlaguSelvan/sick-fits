@@ -3,10 +3,11 @@ import Router from 'next/router'
 import Page from '../components/Page'
 import NProgress from 'nprogress';
 import { ApolloProvider } from '@apollo/client';
-import withData from '../lib/withData';
+import withApollo from '../lib/withData';
+import { MyAppProps, PageProps } from '../Types/PageProps'
 
 import '../components/styles/nprogress.css';
-import { DocumentContext } from 'next/dist/next-server/lib/utils';
+import { AppContext, AppProps } from 'next/app';
 
 Router.events.on('routeChangeStart', () => {
 	NProgress.start()
@@ -20,13 +21,7 @@ Router.events.on('routeChangeError', () => {
 	NProgress.done()
 })
 
-interface IComponent {
-	Component: React.ComponentType<any>;
-	pageProps: any;
-	apollo: any;
-}
-
-const MyApp = ({ Component, pageProps, apollo }: IComponent) => {
+const MyApp = ({ Component, pageProps, apollo }: MyAppProps) => {
 	return (
 		<ApolloProvider client={apollo}>
 			<Page>
@@ -36,18 +31,14 @@ const MyApp = ({ Component, pageProps, apollo }: IComponent) => {
 	)
 }
 
-interface IProps {
-	Component: any;
-	ctx: DocumentContext;
-}
 
-// Todo: Refactor Types
-MyApp.getInitialProps = async ({ Component, ctx }: IProps) => {
-	let pageProps: any = {};
+MyApp.getInitialProps = async ({ Component, ctx }: any): Promise<PageProps> => {
+	let pageProps: PageProps = {};
 	if (Component.getInitialProps) {
 		pageProps = await Component.getInitialProps(ctx);
 	}
 	pageProps.query = ctx.query;
+	return pageProps;
 }
 
-export default withData(MyApp)
+export default withApollo(MyApp)

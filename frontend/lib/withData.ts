@@ -3,6 +3,9 @@ import { onError } from '@apollo/link-error';
 import { getDataFromTree } from '@apollo/client/react/ssr';
 import { createUploadLink } from 'apollo-upload-client';
 import withApollo from 'next-with-apollo';
+// require('dotenv').config();
+
+// console.log(process.env.NODE_ENV === 'development' ? process.env.ENDPOINT : process.env.PRODENDPOINT, 'development')
 
 function createClient({ headers, initialState }: any) {
 	return new ApolloClient({
@@ -21,7 +24,7 @@ function createClient({ headers, initialState }: any) {
 			}),
 			// this uses apollo-link-http under the hood, so all the options here come from that package
 			createUploadLink({
-				uri: process.env.NODE_ENV === 'development' ? process.env.endpoint : process.env.prodEndpoint,
+				uri: 'http://localhost:3000/api/graphql',
 				fetchOptions: {
 					credentials: 'include'
 				},
